@@ -1,0 +1,83 @@
+<h4>Add Student</h4>
+<hr>
+<form [formGroup]='formGroup' (ngSumbit)="updateStudent()">
+
+    <div>
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" name="name" formControlName="name">
+
+            <div
+                *ngIf="formGroup.get('name')?.['invalid'] && (formGroup.get('name')?.['touched'] || formGroup.get('name')?.['dirty'])">
+                <small *ngIf="formGroup.get('name')?.errors?.['required']">
+                    Name is required
+                </small>
+                <small *ngIf="formGroup.get('name')?.errors?.['pattern']">
+                    Name should not contain special characters
+                </small>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label for="mobileNumber">Mobile Number: </label>
+            <input type="number" name="mobileNumber" formControlName="mobileNumber">
+
+            <div
+                *ngIf="formGroup.get('mobileNumber')?.['invalid'] && (formGroup.get('mobileNumber')?.['touched'] || formGroup.get('mobileNumber')?.['dirty'])">
+                <small *ngIf="formGroup.get('mobileNumber')?.errors?.['required']">
+                    Mobile Number is required
+                </small>
+                <small *ngIf="formGroup.get('mobileNumber')?.errors?.['pattern']">
+                    Mobile should have 10 digits
+                </small>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label for="email">Email: </label>
+            <input type="email" name="email" formControlName="email">
+
+            <div
+                *ngIf="formGroup.get('email')?.['invalid'] && (formGroup.get('email')?.['touched'] || formGroup.get('email')?.['dirty'])">
+                <small *ngIf="formGroup.get('email')?.errors?.['required']">
+                    Email is required
+                </small>
+                <small *ngIf="formGroup.get('email')?.errors?.['pattern']">
+                    Email should be correct
+                </small>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label for="dateOfBirth">Date of Birth: </label>
+            <input type="text" name="dateOfBirth" formControlName="dateOfBirth">
+
+            <div
+                *ngIf="formGroup.get('dateOfBirth')?.['invalid'] && (formGroup.get('dateOfBirth')?.['touched'] || formGroup.get('dateOfBirth')?.['dirty'])">
+                <small *ngIf="formGroup.get('dateOfBirth')?.errors?.['required']">
+                    Date of Birth is required
+                </small>
+                <small *ngIf="formGroup.get('dateOfBirth')?.errors?.['invalidDate']">
+                    Date of Birth should be correct
+                </small>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label for="salary">Salary: </label>
+            <input type="salary" name="salary" formControlName="salary">
+
+            <div
+                *ngIf="formGroup.get('salary')?.['invalid'] && (formGroup.get('salary')?.['touched'] || formGroup.get('salary')?.['dirty'])">
+                <small *ngIf="formGroup.get('salary')?.errors?.['required']">
+                    Salary is required
+                </small>
+                <small *ngIf="formGroup.get('salary')?.errors?.['invalidSalary']">
+                    Salary should be positive
+                </small>
+            </div>
+        </div>
+        <br>
+        <button type="submit" [disabled]='!formGroup.valid'>Update</button>
+    </div>
+</form>

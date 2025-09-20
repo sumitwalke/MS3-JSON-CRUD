@@ -1,0 +1,29 @@
+<br>
+<div>
+    <label for="search">Search: </label>
+    <input placeholder="name or id" (input)="searchStudents($event)">
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Mobile Number</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Salary</th>
+            <th colspan="3">Operations</th>
+        </tr>
+
+        <tr *ngFor="let student of filteredStudents$ | async">
+            <td>{{student.name}}</td>
+            <td>{{student.mobileNumber}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.dateOfBirth}}</td>
+            <td>{{student.salary}}</td>
+            <td><button routerLink="/getStudent/{{student.id}}">View</button></td>
+            <td><button routerLink="/updateStudent/{{student.id}}">Update</button></td>
+            <!-- <td><button (click)='deleteStudent(student.id)'>Delete</button></td> -->
+            <td><button routerLink="/getStudents/{{student.id}}">Delete</button></td>
+        </tr>
+    </table>
+</div>
