@@ -1,3 +1,20 @@
 {
-  "students": []
+  "students": [
+    {
+      "id": "4e45",
+      "name": "Sumit Walke",
+      "mobileNumber": 9876543210,
+      "email": "Sumit.Walke@LTIMindtree.com",
+      "dateOfBirth": "2003-09-28",
+      "salary": "25000"
+    },
+    {
+      "id": "e338",
+      "name": "Sumit Walke",
+      "mobileNumber": 9876543210,
+      "email": "Kunal.Patil@LTIMindtree.com",
+      "dateOfBirth": "2003-09-28",
+      "salary": "25000"
+    }
+  ]
 }

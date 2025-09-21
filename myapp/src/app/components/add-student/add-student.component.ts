@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable, of, toArray } from 'rxjs';
+import { Student } from 'src/app/models/student';
 import { StudentService } from 'src/app/services/student.service';
 
 @Component({
@@ -14,13 +17,15 @@ export class AddStudentComponent implements OnInit{
   errorMessage = '';
   success = false;
 
-  constructor(private formBuiler: FormBuilder, private studentService: StudentService){}
+  data$: Observable<Student[]> = of([]);
+
+  constructor(private formBuiler: FormBuilder, private studentService: StudentService, private router: Router){}
 
   ngOnInit(): void {
     this.formGroup = this.formBuiler.group({
       name: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^[a-zA-Z0-9 ]+$/)]],
       mobileNumber: ['', [Validators.required, Validators.pattern(/^[6-9][0-9]{9}$/)]],
-      email: ['',[ Validators.required, Validators.email]],
+      email: ['',[ Validators.required, Validators.email, this.emailValidator]],
       dateOfBirth: ['', [Validators.required, this.dateOfBirthValidator]],
       salary: ['',[ Validators.required, this.salaryValidator]]
     })
@@ -42,12 +47,25 @@ export class AddStudentComponent implements OnInit{
     return null;
   }
 
+  emailValidator(control: AbstractControl): ValidationErrors | null{
+    const studentEmail = control.value;
+    let storedData = JSON.parse(localStorage.getItem('students') || '{}');
+    if(Array.isArray(storedData)){
+      const studentEmails = storedData.map((student: Student)=> student.email); 
+      if(studentEmails.includes(studentEmail)){
+        return {invalidEmail: true};
+      }
+    }
+    return null;
+  }
+
 
   addStudent(){
     if(this.formGroup.valid){
       this.studentService.addStudent(this.formGroup.value).subscribe((data)=>{
         this.successMessage = 'Added Student successfully';
         this.formGroup.reset();
+        this.router.navigate(['/getStudents']);
       });
     }else{
       this.errorMessage = 'Failed to add Student';

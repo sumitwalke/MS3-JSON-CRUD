@@ -45,6 +45,9 @@
                 <small *ngIf="formGroup.get('email')?.errors?.['pattern']">
                     Email should be correct
                 </small>
+                <small *ngIf="formGroup.get('email')?.errors?.['invalidEmail']">
+                    Email already exists
+                </small>
             </div>
         </div>
         <br>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, of, toArray } from 'rxjs';
 import { Student } from 'src/app/models/student';
 import { StudentService } from 'src/app/services/student.service';
 
@@ -18,9 +18,9 @@ export class GetStudentComponent implements OnInit {
 
   ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
-    if(id){
+    if (id) {
       this.deleteStudent(id);
-    } 
+    }
     this.getStudents();
   }
 
@@ -29,6 +29,13 @@ export class GetStudentComponent implements OnInit {
     this.filteredStudents$ = this.data$.pipe(map((students) =>
       students.sort((a: Student, b: Student) => a.name.localeCompare(b.name))
     ))
+    
+    this.filteredStudents$.pipe(toArray());
+    this.filteredStudents$.subscribe((students)=>{
+      if(students){
+        localStorage.setItem( 'students',JSON.stringify(students));
+      }
+    })
   }
 
   searchStudents(event: any) {
@@ -38,9 +45,9 @@ export class GetStudentComponent implements OnInit {
     if (!value || value == '') {
       this.filteredStudents$ = this.data$;
       return;
-    } else{
+    } else {
       this.filteredStudents$ = this.data$.pipe(map((students) => {
-        return students.filter((student) => 
+        return students.filter((student) =>
           // (student.name.includes(value) || student.email.includes(value) || student.name.toLowerCase().includes(value) || student.email.toLowerCase().includes(value))
           (student.name.toLowerCase().includes(value.toLowerCase()))
         )
@@ -48,11 +55,11 @@ export class GetStudentComponent implements OnInit {
     }
   }
 
-  deleteStudent(id: string){
-   if(id){
-    this.studentService.deleteStudentById(id).subscribe((data)=>{
-      this.router.navigate(['/getStudents'])
-    });
-   }
+  deleteStudent(id: string) {
+    if (id) {
+      this.studentService.deleteStudentById(id).subscribe((data) => {
+        this.router.navigate(['/getStudents'])
+      });
+    }
   }
 }

@@ -10,6 +10,7 @@ import { GetStudentByIdComponent } from './components/get-student-by-id/get-stud
 import { UpdateStudentByIdComponent } from './components/update-student-by-id/update-student-by-id.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipePipe } from './pipes/date-pipe.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DatePipePipe } from './pipes/date-pipe.pipe';
     AddStudentComponent,
     GetStudentByIdComponent,
     UpdateStudentByIdComponent,
-    DatePipePipe
+    DatePipePipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
