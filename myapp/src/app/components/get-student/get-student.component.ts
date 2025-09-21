@@ -13,6 +13,7 @@ export class GetStudentComponent implements OnInit {
 
   data$: Observable<Student[]> = of([]);
   filteredStudents$: Observable<Student[]> = of([]);
+  searchTerm = '';
 
   constructor(private studentService: StudentService, private route: ActivatedRoute, private router: Router) { }
 

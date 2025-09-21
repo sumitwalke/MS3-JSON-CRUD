@@ -1,7 +1,7 @@
-<br>
+<!-- <br>
 <div>
     <label for="search">Search: </label>
-    <input placeholder="name or id" (input)="searchStudents($event)">
+    <input placeholder="name or id" [(ngModel)]="searchTerm">
     <br>
     <br>
     <table>
@@ -13,8 +13,10 @@
             <th>Salary</th>
             <th colspan="3">Operations</th>
         </tr>
-
-        <tr *ngFor="let student of filteredStudents$ | async">
+        <div>
+            
+        </div>
+        <tr *ngFor="let student of students | filter:searchTerm">
             <td>{{student.name}}</td>
             <td>{{student.mobileNumber}}</td>
             <td>{{student.email}}</td>
@@ -22,8 +24,48 @@
             <td>{{student.salary}}</td>
             <td><button routerLink="/getStudent/{{student.id}}">View</button></td>
             <td><button routerLink="/updateStudent/{{student.id}}">Update</button></td>
-            <!-- <td><button (click)='deleteStudent(student.id)'>Delete</button></td> -->
+            <td><button (click)='deleteStudent(student.id)'>Delete</button></td>
             <td><button routerLink="/getStudents/{{student.id}}">Delete</button></td>
         </tr>
     </table>
+</div> -->
+
+
+<br>
+<div>
+    <label for="search">Search: </label>
+    <input placeholder="name or id" [(ngModel)]="searchTerm">
+    <br>
+    <br>
+    <div *ngIf="filteredStudents$ | async as students">
+        <div *ngIf="(students | filter:searchTerm).length > 0; else noResults">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Salary</th>
+                    <th colspan="3">Operations</th>
+                </tr>
+                <div>
+                    
+                </div>
+                <tr *ngFor="let student of students | filter:searchTerm">
+                    <td>{{student.name}}</td>
+                    <td>{{student.mobileNumber}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.dateOfBirth}}</td>
+                    <td>{{student.salary}}</td>
+                    <td><button routerLink="/getStudent/{{student.id}}">View</button></td>
+                    <td><button routerLink="/updateStudent/{{student.id}}">Update</button></td>
+                    <!-- <td><button (click)='deleteStudent(student.id)'>Delete</button></td> -->
+                    <td><button routerLink="/getStudents/{{student.id}}">Delete</button></td>
+                </tr>
+            </table>
+        </div>
+        <ng-template #noResults>
+            <small>No students found matching</small>
+        </ng-template>
+    </div>
 </div>

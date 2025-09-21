@@ -6,14 +6,17 @@ import { Student } from '../models/student';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(students: Student[], searchText: String): any[] {
+  transform(students: Student[], searchTerm: String): Student[] {
     if (!students) return [];
-    if (!searchText) return students;
+    if (!searchTerm) return students;
 
-    return students.filter((student) => {
-      return student.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        student.email.toLowerCase().includes(searchText.toLowerCase())
-    });
+    // return students.filter((student) => {
+    //   return student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    //     student.email.toLowerCase().includes(searchTerm.toLowerCase())
+    // });
+
+    return students.filter((student)=> student.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  
   }
 
 }

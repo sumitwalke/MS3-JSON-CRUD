@@ -8,7 +8,7 @@ import { GetStudentComponent } from './components/get-student/get-student.compon
 import { AddStudentComponent } from './components/add-student/add-student.component';
 import { GetStudentByIdComponent } from './components/get-student-by-id/get-student-by-id.component';
 import { UpdateStudentByIdComponent } from './components/update-student-by-id/update-student-by-id.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipePipe } from './pipes/date-pipe.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 
@@ -26,7 +26,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
