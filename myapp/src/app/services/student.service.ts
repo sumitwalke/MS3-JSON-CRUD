@@ -11,7 +11,7 @@ export class StudentService {
 
   constructor(private http: HttpClient){ }
 
-  apiUrl = "https://ec2-15-206-210-24.projects.wecreateproblems.com/proxy/3000/students";
+  apiUrl = "https://ec2-3-109-122-159.projects.wecreateproblems.com/proxy/3000/students";
 
   addStudent(student: Student):Observable<Student>{
     return this.http.post<Student>(this.apiUrl, student);

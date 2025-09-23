@@ -1,0 +1,23 @@
+<br>
+<br>
+<label for="Search">Search: </label>
+<input type="text" [(ngModel)] = 'searchTerm'>
+
+<div *ngIf="filteredListings$ | async as listings">
+    <div *ngIf="(listings | filter:searchTerm).length > 0 ; else noResult">
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Agent</th>
+            </tr>
+            <tr *ngFor="let listing of listings | filter:searchTerm">
+                <th>Title</th>
+                <th>Agent</th>
+            </tr>
+        </table>
+    </div>
+
+    <ng-template #noResult>
+        <small>No listings found</small>
+    </ng-template>
+</div>
